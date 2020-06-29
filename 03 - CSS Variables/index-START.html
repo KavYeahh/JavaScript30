@@ -1,51 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Scoped CSS Variables and JS</title>
-</head>
-<body>
-  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+<html>
+    <head>
+        <title>JS30_Day#3</title>
+        <link rel="icon" href="https://blog.protexting.com/wp-content/uploads/2014/07/turquoise-number-3-filled-512.jpg">
+        <style>
+            body
+            {
+                position: absolute;
+                left: 20%;
+                background-color: rgb(108, 114, 114);
+                color: cornsilk;
+            }
+            :root
+            {
+                --base : #3aaa8e;
+                --spacing : 10px;
+                --blur : 10px;
 
-  <div class="controls">
-    <label for="spacing">Spacing:</label>
-    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+            }
+            .rose
+            {
+                color: var(--base);
+                text-shadow: 0 0 10px var(--base);
 
-    <label for="blur">Blur:</label>
-    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+            }
+            .img
+            {
+                background: var(--base);
+                width: 25rem;
+                padding: var(--spacing);
+                filter: blur(var(--blur));
+            }
+            h1{
+                color: cyan;
+            }
+            .control
+            {
+                margin-bottom: 20px;
+                padding-right: 20rem;
+                font-size: 20px;
+            }
+            .text
+        {
+            color: #28daad;
+            text-shadow:0 0 20px rgb(18, 19, 18);
+            font-size: 3rem;
+            padding-inline-end:3rem;
+            position: absolute;
+            top: 50%;
+            right: -15%;
+            transform: translate(-50%, -50%);
+        }
+        </style>
+    </head>
+    <body>
+        <h1 style="padding-left: 7rem;">Picture Edits</h1>
+        <h2> Adjest the values to change the effects of <span class="rose">Rose</span></h2>
+        <h2 class="text">Day#2</h2>
+        <div class="control">
+            <label for="spacing">spacing:</label>
+            <input type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+            <label for="blur">blur:</label>
+            <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+            <label for="base">color:</label>
+            <input type="color" name="base" value="#3aaa8e">
+        </div>
+        <audio id="audio" src="https://cdn2.melodyloops.com/mp3/preview-blurry-reflections.ogg"></audio>
+        <img class = "img" src ="https://i.etsystatic.com/7052665/r/il/e98229/871494525/il_570xN.871494525_qplm.jpg">
+        <script>
+                const inputs = document.querySelectorAll('.control input');
+                var audio = document.getElementById("audio");
+                function movement()
+                {
+                    const suffix = this.dataset.sizing || '';
+                    document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+                    audio.play();
+                }
+                inputs.forEach(input => input.addEventListener('change', movement));
+                inputs.forEach(input => input.addEventListener('mousemove', movement));
 
-    <label for="base">Base Color</label>
-    <input id="base" type="color" name="base" value="#ffc600">
-  </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
-
-  <style>
-
-    /*
-      misc styles, nothing to do with CSS variables
-    */
-
-    body {
-      text-align: center;
-      background: #193549;
-      color: white;
-      font-family: 'helvetica neue', sans-serif;
-      font-weight: 100;
-      font-size: 50px;
-    }
-
-    .controls {
-      margin-bottom: 50px;
-    }
-
-    input {
-      width: 100px;
-    }
-  </style>
-
-  <script>
-  </script>
-
-</body>
-</html>
+        </script>
+    </body>
