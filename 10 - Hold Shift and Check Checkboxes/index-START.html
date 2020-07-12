@@ -16,7 +16,7 @@
       max-width: 400px;
       margin: 50px auto;
       background: white;
-      border-radius: 5px;
+      border-radius: 8px;
       box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
     }
 
@@ -96,6 +96,34 @@
   </div>
 
 <script>
+    const check = document.querySelectorAll('.inbox input[type = "checkbox"]');
+    let lastchecked;
+    function checked(e)
+    {
+        console.log("check1");
+        let inbetween = false;
+        if (e.shiftKey && this.checked)
+        {
+            console.log("check2");
+            check.forEach(checkbox =>
+            {
+                console.log(checkbox);
+                if(checkbox === this || checkbox === lastchecked)
+                {
+                    inbetween=!inbetween;
+                    console.log('Starting to check them in between!');
+                }
+                if(inbetween)
+                {
+                    checkbox.checked = true;
+                }    
+            });
+           
+        } 
+        lastchecked=this; 
+    }
+
+    check.forEach(stricked => stricked.addEventListener('click', checked));
 </script>
 </body>
 </html>
