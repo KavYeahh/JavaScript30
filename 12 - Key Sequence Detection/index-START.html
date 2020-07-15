@@ -7,6 +7,18 @@
 </head>
 <body>
 <script>
+  const kavya = [];
+  const code = 'kavya';
+window.addEventListener('keyup', (e) => {
+console.log(e.key);
+kavya.push(e.key);
+kavya.splice(-kavya.length-1 , kavya.length-code.length);
+if(kavya.join('').includes(code))
+{
+  console.log("hurray");
+  cornify_add();
+}
+});
 </script>
 </body>
 </html>
