@@ -8,32 +8,33 @@
 
   <script>
     // start with strings, numbers and booleans
+    let cool = 5;
+    let hot =cool;
+    console.log(cool,hot);
+    cool = 10;
+    console.log(cool,hot); // editting coppied variable does not change original assignment
 
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
-
     // You might think we can just do something like this:
-
+    const copy = players;
     // however what happens when we update that array?
-
+    copy[3] = 'kavya';
+    console.log(players, copy);
     // now here is the problem!
-
     // oh no - we have edited the original array too!
-
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
-
     // So, how do we fix this? We take a copy instead!
-
     // one way
-
+    let copy1 = players.slice();
     // or create a new array and concat the old one in
-
+    let copy2 = [].concat(players);
     // or use the new ES6 Spread
-
+    let copy3 = [...players];
     // now when we update it, the original one isn't changed
-
+    let copy4 = Array.from(players);
     // The same thing goes for objects, let's say we have a person object
 
     // with Objects
@@ -43,13 +44,28 @@
     };
 
     // and think we make a copy:
-
+    const obj1 = person;
+    obj1.age = 15;
+    console.log(person); // this will change main object 
     // how do we take a copy instead?
-
+    const obj2 = Object.assign({}, person);
     // We will hopefully soon see the object ...spread
-
+    //const obj3 = {...person};
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    const person1 = {
+      name: 'Wes Bos',
+      age: 80,
+      social : {
+          twitter: '@wes',
+          facebook: 'wesb'
+      }
+    };
+    const dev = Object.assign({},person1);
+    dev.social.facebook = 'kavya';
+    console.log(person1); 
+    // alternative 
 
+    const dev1 = JSON.parse(JSON.stringify(person1));
   </script>
 
 </body>
