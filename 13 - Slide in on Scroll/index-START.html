@@ -58,12 +58,34 @@
       };
     }
 
+    const slides = document.querySelectorAll('.slide-in');
+    function jumpin(e)
+    {   
+        slides.forEach(slide =>
+        {
+            const slideInAt = (window.scrollY + window.innerHeight) - slide.height / 2;
+            const imgbottom = slide.offsetTop + slide.height;
+
+            const ishalfway = slideInAt > slide.offsetTop;
+            const isnotpassed = window.scrollY < imgbottom;
+            if (ishalfway && isnotpassed)
+            {
+                slide.classList.add('active');
+            }  
+            else{
+                slide.classList.remove('active');
+            }
+        });
+        
+    }
+
+    window.addEventListener('scroll', debounce(jumpin));
   </script>
 
   <style>
     html {
       box-sizing: border-box;
-      background: #ffc600;
+      background: #578a05;
       font-family: 'helvetica neue';
       font-size: 20px;
       font-weight: 200;
